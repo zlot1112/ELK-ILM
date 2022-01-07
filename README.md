@@ -11,15 +11,15 @@
 * Warm : 인덱스가 업데이트되지 않지만, 활발하게 사용하는 상태
 * Cold : the index is no longer being updated and is seldom queried. The information still needs to be searchable, but it’s okay if those queries are slower.   
 * Delete : 인덱스가 이제 사용되지 않으며, 삭제해도 되는상태 
-
-Index Lifecycle Policies 생성
-Kibana > management > Index Lifecycle Policies
-name : gklog-policy
-Delete phase : Active , 30 Days
-2. Index Template 생성
-   Kibana > Dev tools
-
-PUT _template/gklog-template
+ 
+Index Lifecycle Policies 생성 
+Kibana > management > Index Lifecycle Policies 
+name : gklog-policy 
+Delete phase : Active , 30 Days 
+2. Index Template 생성 
+   Kibana > Dev tools 
+```
+PUT _template/gklog-template 
 {
 "index_patterns": ["gklog-*"],
 "template": {
@@ -29,11 +29,15 @@ PUT _template/gklog-template
 "index.lifecycle.name": "gklog-policy"
 }
 }
-}
-3. Index Template <-> Index Lifecycle Policy 매핑
-   kibana > management > Index Lifecycle Policies > gklog-policy > Actions > Add policy "gklog-policy" to index template
+}```
+  
+3. Index Template <-> Index Lifecycle Policy 매핑 
+   kibana > management > Index Lifecycle Policies > gklog-policy > Actions > Add policy "gklog-policy" to index template.  
+
 4. 기존 Index , Index Lifecycle Policy 부여
    Kibana > Dev tools
+   
+```
    PUT gklog-*/_settings
    {
    "index": {
@@ -42,7 +46,7 @@ PUT _template/gklog-template
    }
    }
    }
-
+```
 2021년 06월 elasticsearch 이슈 및 해결방법 공유
 
 ##참고사이트  
